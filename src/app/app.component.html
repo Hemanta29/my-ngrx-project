@@ -11,3 +11,7 @@
   including versions of Lorem Ipsum.
 </div>
 <p (click)="showLess()" *ngIf="show$ | async">Show less...</p>
+
+<div *ngIf="dog$ | async as dogImage" style="text-align: center;">
+  <img [src]="dogImage.message" alt="" height="400" width="50%" style="border-radius: 15px;" />
+</div>
