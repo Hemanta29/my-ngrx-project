@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { hide, show } from './ngrx-state/actions/home.actions';
 import { HomeService } from './services/home.service';
+import * as DogActions from './ngrx-state/actions/dog.actions';
 
 @Component({
   selector: 'app-root',
@@ -22,15 +23,19 @@ export class AppComponent implements OnInit {
 
   constructor(
     private store: Store<{ home: false }>,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private dogStore: Store<{dog:any}>
   ) {
-    this.show$ = this.store.select('home');
+    this.show$ = store.select('home');
+    this.dog$ = dogStore.select('dog');
   }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.dog$ = this.homeService.getDog();
+    // this.dog$ = this.homeService.getDog();
+
+    this.dogStore.dispatch(DogActions.loadDog());
   }
 
   showMore() {
